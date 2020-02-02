@@ -23,7 +23,6 @@ class Forecast extends Component {
     var lon = this.props.lon
     var api = process.env.REACT_APP_API
     fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&units=imperial&appid='+api)
-    //fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&units=imperial&appid=b5ef7ac8cf8cd652f3e1aa327644b8c8')
     .then(result => result.json())
       .then(result => {
         this.setState({
