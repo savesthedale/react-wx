@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
+import Moment from 'react-moment';
 import { useCookies, Cookies } from 'react-cookie';
 const Route = require('react-router-dom').Route;
 const BrowserRouter = require('react-router-dom').BrowserRouter;
 const Link = require('react-router-dom').Link
+
 class Current extends Component {
     state = {
       all:[],
@@ -42,17 +44,27 @@ class Current extends Component {
     return (      
       <div>          
       <Container>
-            <h2 class="text-center"> {all.name} </h2>
-            <div class="text-center"><img  class="img-fluid" style={{height: '15rem', margin:'-5% auto -5% auto'}} src={`icons/${wx.icon}.svg`}/></div>
-            <h1 class=" display-1 text-center">{Math.round(main.temp)}&#176;</h1>
-            <h2 class="text-center">{wx.description}</h2>
-            <h4 class="text-center">{Math.round(wind.speed)}mph <img src={`icons/wind.png`} style={{height:'2rem', transform: `rotate(${wind.deg}deg)` }}></img></h4>
+        <Row className="justify-content-md-center">
+          <Col xs lg="2">
+          </Col>
+          <Col xs lg="2">
+            <h2> {all.name} </h2>
+            <div ClassName="current_icon"><img src={`icons/${wx.icon}.svg`}></img> </div>
+            <h1>{Math.round(main.temp)}</h1>
+            <p>{wx.description}</p>
+            <p>{Math.round(wind.speed)}mph <img src={`icons/wind.png`} style={{height:'16px', transform: `rotate(${wind.deg}deg)` }}></img></p>
+    
+    
+          </Col>
+          <Col xs lg="2">
+          </Col>
+        </Row>
       </Container>
       </div>    
     )
   }
 }
 
-  export default Current
+  export default Wind
 
 
