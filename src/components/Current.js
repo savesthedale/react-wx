@@ -13,6 +13,7 @@ class Current extends Component {
       all:[],
       main: [],
       wx: [],
+      wind: [],
     }
 
  // Code is invoked after the component is mounted/inserted into the DOM tree.
@@ -21,7 +22,7 @@ class Current extends Component {
     var lon = this.props.lon
     var api = process.env.REACT_APP_API
     fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&units=imperial&appid='+api)
-    //fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&units=imperial&appid=b5ef7ac8cf8cd652f3e1aa327644b8c8')
+
 
     .then(result => result.json())
       .then(result => {
@@ -29,6 +30,7 @@ class Current extends Component {
           all: result,
           main: result.main,
           wx: result.weather[0],
+          wind: result.wind,
         })
       })
   }
@@ -37,6 +39,7 @@ class Current extends Component {
     const all = this.state.all
     const main = this.state.main
     const wx = this.state.wx
+    const wind = this.state.wind
     //const cookies = this.props.cookies;
     return (      
       <div>          
@@ -46,8 +49,12 @@ class Current extends Component {
           </Col>
           <Col xs lg="2">
             <h2> {all.name} </h2>
-            <h1>{main.temp}</h1>
+            <div ClassName="current_icon"><img src={`icons/${wx.icon}.svg`}></img> </div>
+            <h1>{Math.round(main.temp)}</h1>
             <p>{wx.description}</p>
+            <p>{Math.round(wind.speed)}mph <img src={`icons/wind.png`} style={{height:'16px', transform: `rotate(${wind.deg}deg)` }}></img></p>
+    
+    
           </Col>
           <Col xs lg="2">
           </Col>

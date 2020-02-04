@@ -17,12 +17,15 @@ class Forecast extends Component {
       list: [],
     }
 
+
+
  // Code is invoked after the component is mounted/inserted into the DOM tree.
  componentDidMount(props) {  
     var lat = this.props.lat
     var lon = this.props.lon
     var api = process.env.REACT_APP_API
     fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&units=imperial&appid='+api)
+  
     .then(result => result.json())
       .then(result => {
         this.setState({
@@ -33,6 +36,7 @@ class Forecast extends Component {
   }
 
   render() {
+    
   var days = this.state.list.slice(0,8).map((item, key) =>
 
   <Col md="auto">
@@ -43,12 +47,12 @@ class Forecast extends Component {
         <Card.Title> {Math.round(item.main.temp)} &#176;</Card.Title>
         <Card.Text> {item.main.humidity}% humidity </Card.Text>
         <Card.Text> {item.weather[0].description}</Card.Text>
-
-      </Card.Body>
+        <Card.Text>Wind {Math.round(item.wind.speed)}mph  <img src={`icons/wind.png`} style={{height:'16px', transform: `rotate(${item.wind.deg}deg)` }}></img> </Card.Text>
+        </Card.Body>
     </Card>
   </Col> )
     
-  
+
     return (
       <Row className="justify-content-md-center-mb-3">
         { days}
